@@ -46,9 +46,9 @@ services:
         #- "traefik.http.routers.listgartenphotography.tls.certresolver=<YOURTRAEFIKCERTRESOLVER>"
         # ^ OPTIONAL: If you want traefik to handle TLS certificates instead of Crafty,
         #   Use this label and put the name of your traefik cert resolver here.
-        - "traefik.http.services.crafty.loadbalancer.server.scheme=https"
+        - "traefik.http.services.crafty.loadbalancer.server.scheme=http"
         # ^ Tell traefik to connect to Crafty via https instead of http
-        - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto = https"
+        - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto = http"
         # ^ Enable websockets for Crafty
     depends_on:
         - "traefik"
