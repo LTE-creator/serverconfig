@@ -37,7 +37,7 @@ services:
     labels:
         - "traefik.enable=true"
         # ^ Use traefik on this container
-        - "traefik.http.routers.crafty.rule=Host(nnci.fr)"
+        - "traefik.http.routers.crafty.rule=Host('nnci.fr')"
         # ^ Set the host URL for traefik
         - "traefik.http.services.crafty.loadbalancer.server.port=8443"
         # ^ Port that Crafty operates on is 8443
