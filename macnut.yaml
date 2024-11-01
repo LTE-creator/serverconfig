@@ -18,7 +18,7 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  
+
   crafty:
     container_name: crafty_container
     image: registry.gitlab.com/crafty-controller/crafty-4:4.4.4
@@ -54,5 +54,6 @@ services:
         # ^ Tell traefik to connect to Crafty via https instead of http
         - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto = https"
         # ^ Enable websockets for Crafty
+        - "traefik.http.routers.crafty.service=crafty"
     depends_on:
         - "traefik"
