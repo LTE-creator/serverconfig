@@ -11,12 +11,13 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--serverstransport.insecureskipverify=true"
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    CLI: --serversTransport.insecureSkipVerify=true
   
   crafty:
     container_name: crafty_container
@@ -40,6 +41,8 @@ services:
         # ^ Use traefik on this container
         - "traefik.http.routers.crafty.rule=Host(`nnci.fr`)"
         # ^ Set the host URL for traefik
+        - "traefik.http.routers.crafty.entrypoints=websecure"
+        #   Set entrypoint
         - "traefik.http.services.crafty.loadbalancer.server.port=8443"
         # ^ Port that Crafty operates on is 8443
         - "traefik.http.routers.crafty.tls=true"
